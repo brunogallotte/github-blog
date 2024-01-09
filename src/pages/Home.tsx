@@ -1,3 +1,5 @@
+import { UserInfo } from '../components/UserInfo/intex'
+
 export function Home() {
-  return <h1>home</h1>
+  return <UserInfo />
 }
