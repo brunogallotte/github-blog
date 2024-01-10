@@ -1,6 +1,8 @@
-import { ReactNode, createContext } from 'react'
+import { ReactNode, createContext, useState } from 'react'
+import { api } from '../lib/axios'
 
-interface Issue {
+export interface Issue {
+  id: number
   title: string
   body: string
   user: {
@@ -12,18 +14,27 @@ interface Issue {
 }
 
 interface IssueContextType {
-  issues: Issue[]
+  issuesData: Issue[]
+  fetchIssueInfo: () => Promise<void>
 }
 
 interface IssuesProviderProps {
   children: ReactNode
 }
 
-const IssueContext = createContext({} as IssueContextType)
+export const IssueContext = createContext({} as IssueContextType)
 
 export function IssuesProvider({ children }: IssuesProviderProps) {
+  const [issuesData, setIssuesData] = useState([] as Issue[])
+
+  async function fetchIssueInfo() {
+    const response = await api.get('/repos/brunogallotte/github-blog/issues')
+
+    setIssuesData(response.data)
+  }
+
   return (
-    <IssueContext.Provider value={{ issues: [] }}>
+    <IssueContext.Provider value={{ issuesData, fetchIssueInfo }}>
       {children}
     </IssueContext.Provider>
   )
