@@ -57,7 +57,7 @@ export const UserInfoFooter = styled.footer`
   }
 `
 
-export const GitHubLink = styled.div`
+export const GitHubLink = styled.a`
   position: absolute;
   top: 0;
   right: 0;
@@ -67,4 +67,5 @@ export const GitHubLink = styled.div`
   align-items: center;
   gap: 0.5rem;
   color: ${(props) => props.theme.blue};
+  text-decoration: none;
 `

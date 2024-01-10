@@ -5,47 +5,64 @@ import {
   faUserGroup,
   faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons'
-import {
-  GitHubLink,
-  UserInfoContainer,
-  UserInfoContent,
-  UserInfoFooter,
-} from './styles'
+
+import * as S from './styles'
+
+import { api } from '../../lib/axios'
+import { useEffect, useState } from 'react'
+
+interface User {
+  login: string
+  followers: number
+  company: string
+  bio: string
+  html_url: string
+}
 
 export function UserInfo() {
+  const [userInfoData, setUserInfoData] = useState<User>({} as User)
+
+  async function fetchUserInfo() {
+    const response = await api.get('/users/brunogallotte')
+
+    setUserInfoData(response.data)
+  }
+
+  useEffect(() => {
+    fetchUserInfo()
+  }, [])
+
   return (
-    <UserInfoContainer className="container">
+    <S.UserInfoContainer className="container">
       <img
         src="http://www.github.com/brunogallotte.png"
         alt="Imagem de perfil"
         className="profileImg"
       />
-      <UserInfoContent>
+      <S.UserInfoContent>
         <strong>Bruno Gallotte</strong>
-        <p>
-          Tristique volutpat pulvinar vel massa, pellentesque egestas. Eu
-          viverra massa quam dignissim aenean malesuada suscipit. Nunc, volutpat
-          pulvinar vel mass.
-        </p>
-        <UserInfoFooter>
+        <p>{userInfoData.bio}</p>
+        <S.UserInfoFooter>
           <div className="userInfoFooterItem">
             <FontAwesomeIcon icon={faGithub} />
-            <span>brunogallotte</span>
+            <span>{userInfoData.login}</span>
           </div>
           <div className="userInfoFooterItem">
             <FontAwesomeIcon icon={faBuilding} />
-            <span>RocketSeat</span>
+            <span>
+              {userInfoData.company ? userInfoData.company : 'Sem companhia'}
+            </span>
           </div>
           <div className="userInfoFooterItem">
             <FontAwesomeIcon icon={faUserGroup} />
-            <span>32 seguidores</span>
+            <span>{userInfoData.followers}</span>
           </div>
-        </UserInfoFooter>
-      </UserInfoContent>
-      <GitHubLink>
+        </S.UserInfoFooter>
+      </S.UserInfoContent>
+      <S.GitHubLink href={userInfoData.html_url} target="_blank">
         <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
         <span>github</span>
-      </GitHubLink>
-    </UserInfoContainer>
+      </S.GitHubLink>
+    </S.UserInfoContainer>
   )
 }
