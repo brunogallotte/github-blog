@@ -1,8 +1,11 @@
+/* eslint-disable camelcase */
+import { ptBR } from 'date-fns/locale/pt-BR'
+import { formatDistanceToNow } from 'date-fns'
 import { CardContainer } from './styles'
 
 interface PostProps {
   title: string
-  created_at: string
+  created_at?: string
   body: string
 }
 
@@ -20,7 +23,13 @@ export function Post({ title, body, created_at }: PostProps) {
       <CardContainer>
         <header>
           <strong>{title}</strong>
-          <time>{created_at}</time>
+          <time>
+            {created_at &&
+              formatDistanceToNow(new Date(created_at), {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+          </time>
         </header>
         <p>{getBody(body)}</p>
       </CardContainer>

@@ -14,7 +14,14 @@ export function Feed() {
   return (
     <FeedContainer className="container">
       {issuesData.map((issue) => {
-        return <Post key={issue.id} title={issue.title} body={issue.body} />
+        return (
+          <Post
+            key={issue.number}
+            title={issue.title}
+            body={issue.body}
+            created_at={issue.created_at}
+          />
+        )
       })}
     </FeedContainer>
   )

@@ -2,20 +2,18 @@ import { ReactNode, createContext, useState } from 'react'
 import { api } from '../lib/axios'
 
 export interface Issue {
-  id: number
   title: string
   body: string
+  number: number
+  created_at: string
   user: {
     login: string
   }
-  comments: number
-  repository_url: string
-  created_at: string
 }
 
 interface IssueContextType {
   issuesData: Issue[]
-  fetchIssueInfo: () => Promise<void>
+  fetchIssueInfo: (query?: string) => Promise<void>
 }
 
 interface IssuesProviderProps {
@@ -27,10 +25,13 @@ export const IssueContext = createContext({} as IssueContextType)
 export function IssuesProvider({ children }: IssuesProviderProps) {
   const [issuesData, setIssuesData] = useState([] as Issue[])
 
-  async function fetchIssueInfo() {
-    const response = await api.get('/repos/brunogallotte/github-blog/issues')
+  async function fetchIssueInfo(query?: string) {
+    const params: { q: string } = query
+      ? { q: query + ' ' + 'repo:brunogallotte/github-blog' }
+      : { q: 'repo:brunogallotte/github-blog' }
 
-    setIssuesData(response.data)
+    const response = await api.get('/search/issues', { params })
+    setIssuesData(response.data.items)
   }
 
   return (
