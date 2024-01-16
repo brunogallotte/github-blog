@@ -1,19 +1,30 @@
 import { ReactNode, createContext, useState } from 'react'
 import { api } from '../lib/axios'
 
-export interface Issue {
+export interface IssueSearchResponse {
   title: string
   body: string
   number: number
   created_at: string
+  comments: number
+  user: {
+    login: string
+  }
+}
+
+interface Issue {
+  url: string
+  title: string
+  number: number
   user: {
     login: string
   }
 }
 
 interface IssueContextType {
-  issuesData: Issue[]
-  fetchIssueInfo: (query?: string) => Promise<void>
+  issuesSearchData: IssueSearchResponse[]
+  fetchSearchIssueInfo: (query?: string) => Promise<void>
+  fetchIssuesData: (issueNumber: string | undefined) => Promise<void>
 }
 
 interface IssuesProviderProps {
@@ -23,19 +34,33 @@ interface IssuesProviderProps {
 export const IssueContext = createContext({} as IssueContextType)
 
 export function IssuesProvider({ children }: IssuesProviderProps) {
-  const [issuesData, setIssuesData] = useState([] as Issue[])
+  const [issuesSearchData, setIssuesSearchData] = useState(
+    [] as IssueSearchResponse[],
+  )
 
-  async function fetchIssueInfo(query?: string) {
+  const [issuesData, setIssuesData] = useState({} as Issue)
+
+  async function fetchSearchIssueInfo(query?: string) {
     const params: { q: string } = query
       ? { q: query + ' ' + 'repo:brunogallotte/github-blog' }
       : { q: 'repo:brunogallotte/github-blog' }
 
     const response = await api.get('/search/issues', { params })
-    setIssuesData(response.data.items)
+    setIssuesSearchData(response.data.items)
+  }
+
+  async function fetchIssuesData(issueNumber: string | undefined) {
+    const response = await api.get(
+      `/repos/brunogallotte/github-blog/issues/${issueNumber}`,
+    )
+
+    console.log(response)
   }
 
   return (
-    <IssueContext.Provider value={{ issuesData, fetchIssueInfo }}>
+    <IssueContext.Provider
+      value={{ issuesSearchData, fetchSearchIssueInfo, fetchIssuesData }}
+    >
       {children}
     </IssueContext.Provider>
   )

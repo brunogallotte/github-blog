@@ -7,8 +7,18 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FooterContent, PostInfoContainer } from './styles'
+import { useParams } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { IssueContext } from '../../contexts/IssuesContext'
 
 export function PostInfo() {
+  const { fetchIssuesData } = useContext(IssueContext)
+  const { issueNumber } = useParams()
+
+  useEffect(() => {
+    fetchIssuesData(issueNumber)
+  }, [])
+
   return (
     <PostInfoContainer className="container">
       <header>

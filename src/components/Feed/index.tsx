@@ -5,21 +5,27 @@ import { Post } from './components/Post'
 
 export function Feed() {
   const issuesContextProps = useContext(IssueContext)
-  const { issuesData, fetchIssueInfo } = issuesContextProps
+  const { issuesSearchData, fetchSearchIssueInfo, fetchIssuesData } =
+    issuesContextProps
 
   useEffect(() => {
-    fetchIssueInfo()
+    fetchSearchIssueInfo()
   }, [])
+
+  function handleFetchIssuesData(numberIssue: number) {
+    fetchIssuesData(numberIssue)
+  }
 
   return (
     <FeedContainer className="container">
-      {issuesData.map((issue) => {
+      {issuesSearchData.map((issue) => {
         return (
           <Post
             key={issue.number}
             title={issue.title}
             body={issue.body}
             created_at={issue.created_at}
+            onClick={() => handleFetchIssuesData(issue.number)}
           />
         )
       })}

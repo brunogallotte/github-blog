@@ -18,6 +18,8 @@ export const CardContainer = styled.div`
     }
 
     time {
+      display: flex;
+      flex-shrink: 0;
       font-size: 0.875rem;
       color: ${(props) => props.theme.baseSpan};
       margin-top: 5px;
