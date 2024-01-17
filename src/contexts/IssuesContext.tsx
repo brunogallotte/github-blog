@@ -13,8 +13,9 @@ export interface IssueSearchResponse {
 }
 
 interface Issue {
-  url: string
+  html_url: string
   title: string
+  body: string
   number: number
   comments: number
   created_at: string
@@ -26,6 +27,7 @@ interface Issue {
 interface IssueContextType {
   issuesSearchData: IssueSearchResponse[]
   issuesData: Issue
+  isLoadingIssuesData: boolean | null
   fetchSearchIssueInfo: (query?: string) => Promise<void>
   fetchIssuesData: (issueNumber: string | undefined) => Promise<void>
 }
@@ -42,6 +44,9 @@ export function IssuesProvider({ children }: IssuesProviderProps) {
   )
 
   const [issuesData, setIssuesData] = useState({} as Issue)
+  const [isLoadingIssuesData, setIsLoadingIssuesData] = useState<
+    null | boolean
+  >(null)
 
   async function fetchSearchIssueInfo(query?: string) {
     const params: { q: string } = query
@@ -50,6 +55,9 @@ export function IssuesProvider({ children }: IssuesProviderProps) {
 
     const response = await api.get('/search/issues', { params })
     setIssuesSearchData(response.data.items)
+    setTimeout(() => {
+      setIsLoadingIssuesData(true)
+    }, 300)
   }
 
   async function fetchIssuesData(issueNumber: string | undefined) {
@@ -67,6 +75,7 @@ export function IssuesProvider({ children }: IssuesProviderProps) {
         fetchSearchIssueInfo,
         fetchIssuesData,
         issuesData,
+        isLoadingIssuesData,
       }}
     >
       {children}

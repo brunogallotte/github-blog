@@ -23,6 +23,10 @@ export const PostInfoContainer = styled.div`
     span {
       color: ${(props) => props.theme.blue};
     }
+
+    a {
+      text-decoration: none;
+    }
   }
 
   strong {

@@ -10,4 +10,10 @@ export const FeedContainer = styled.main`
   a {
     text-decoration: none;
   }
+
+  .loading {
+    grid-column: span 2;
+    justify-content: center;
+    justify-self: center;
+  }
 `

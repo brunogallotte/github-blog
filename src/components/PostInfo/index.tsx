@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { IssueContext } from '../../contexts/IssuesContext'
 
@@ -22,10 +22,14 @@ export function PostInfo() {
       <header>
         <div className="wrapper">
           <FontAwesomeIcon icon={S.faChevronLeft} />
-          <span>voltar</span>
+          <Link to="/">
+            <span>voltar</span>
+          </Link>
         </div>
         <div className="wrapper">
-          <span>ver no git hub</span>
+          <a href={issuesData.html_url} target="_blank" rel="noreferrer">
+            <span>ver no git hub</span>
+          </a>
           <FontAwesomeIcon icon={S.faArrowUpRightFromSquare} />
         </div>
       </header>
