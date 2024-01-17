@@ -2,31 +2,27 @@ import { useContext, useEffect } from 'react'
 import { IssueContext } from '../../contexts/IssuesContext'
 import { FeedContainer } from './styles'
 import { Post } from './components/Post'
+import { Link } from 'react-router-dom'
 
 export function Feed() {
   const issuesContextProps = useContext(IssueContext)
-  const { issuesSearchData, fetchSearchIssueInfo, fetchIssuesData } =
-    issuesContextProps
+  const { issuesSearchData, fetchSearchIssueInfo } = issuesContextProps
 
   useEffect(() => {
     fetchSearchIssueInfo()
   }, [])
 
-  function handleFetchIssuesData(numberIssue: number) {
-    fetchIssuesData(numberIssue)
-  }
-
   return (
     <FeedContainer className="container">
       {issuesSearchData.map((issue) => {
         return (
-          <Post
-            key={issue.number}
-            title={issue.title}
-            body={issue.body}
-            created_at={issue.created_at}
-            onClick={() => handleFetchIssuesData(issue.number)}
-          />
+          <Link key={issue.number} to={`/issues/${issue.number}`}>
+            <Post
+              title={issue.title}
+              body={issue.body}
+              created_at={issue.created_at}
+            />
+          </Link>
         )
       })}
     </FeedContainer>

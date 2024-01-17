@@ -6,4 +6,8 @@ export const FeedContainer = styled.main`
   padding-top: 48px;
   padding-bottom: 234px;
   gap: 2rem;
+
+  a {
+    text-decoration: none;
+  }
 `

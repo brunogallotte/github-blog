@@ -16,6 +16,8 @@ interface Issue {
   url: string
   title: string
   number: number
+  comments: number
+  created_at: string
   user: {
     login: string
   }
@@ -23,6 +25,7 @@ interface Issue {
 
 interface IssueContextType {
   issuesSearchData: IssueSearchResponse[]
+  issuesData: Issue
   fetchSearchIssueInfo: (query?: string) => Promise<void>
   fetchIssuesData: (issueNumber: string | undefined) => Promise<void>
 }
@@ -54,12 +57,17 @@ export function IssuesProvider({ children }: IssuesProviderProps) {
       `/repos/brunogallotte/github-blog/issues/${issueNumber}`,
     )
 
-    console.log(response)
+    setIssuesData(response.data)
   }
 
   return (
     <IssueContext.Provider
-      value={{ issuesSearchData, fetchSearchIssueInfo, fetchIssuesData }}
+      value={{
+        issuesSearchData,
+        fetchSearchIssueInfo,
+        fetchIssuesData,
+        issuesData,
+      }}
     >
       {children}
     </IssueContext.Provider>
