@@ -12,6 +12,7 @@ import * as S from './styles'
 
 import { api } from '../../lib/axios'
 import { useEffect, useState } from 'react'
+import { SkeletonLoading } from './components'
 
 interface User {
   login: string
@@ -38,14 +39,14 @@ export function UserInfo() {
 
   return (
     <S.UserInfoContainer className="container">
-      {userInfoData.login ? (
-        <>
-          <img
-            src="http://www.github.com/brunogallotte.png"
-            alt="Imagem de perfil"
-            className="profileImg"
-          />
-          <S.UserInfoContent>
+      <img
+        src="http://www.github.com/brunogallotte.png"
+        alt="Imagem de perfil"
+        className="profileImg"
+      />
+      <S.UserInfoContent>
+        {userInfoData.login ? (
+          <>
             <strong>{userInfoData.login}</strong>
             <p>{userInfoData.bio}</p>
             <S.UserInfoFooter>
@@ -66,15 +67,15 @@ export function UserInfo() {
                 <span>{userInfoData.followers}</span>
               </div>
             </S.UserInfoFooter>
-          </S.UserInfoContent>
-          <S.GitHubLink href={userInfoData.html_url} target="_blank">
-            <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-            <span>github</span>
-          </S.GitHubLink>
-        </>
-      ) : (
-        <Skeleton count={4} />
-      )}
+          </>
+        ) : (
+          <SkeletonLoading />
+        )}
+      </S.UserInfoContent>
+      <S.GitHubLink href={userInfoData.html_url} target="_blank">
+        <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+        <span>github</span>
+      </S.GitHubLink>
     </S.UserInfoContainer>
   )
 }

@@ -20,6 +20,7 @@ export const UserInfoContainer = styled.div`
 
 export const UserInfoContent = styled.div`
   display: flex;
+  width: 100%;
   flex-direction: column;
   gap: 0.5rem;
 
