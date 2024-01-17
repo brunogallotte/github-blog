@@ -14,7 +14,6 @@ export function Feed() {
     fetchSearchIssueInfo()
   }, [])
 
-  console.log(isLoadingIssuesData)
   return (
     <FeedContainer className="container">
       {isLoadingIssuesData ? (

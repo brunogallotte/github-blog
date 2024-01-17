@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 export const UserInfoContainer = styled.div`
-  position: relative;
   display: flex;
   width: 100%;
   background: ${(props) => props.theme.baseProfile};
