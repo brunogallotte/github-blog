@@ -1,7 +1,5 @@
 import styled from 'styled-components'
 
-import { UserInfoContainer } from '../UserInfo/styles'
-
 export const PostInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
