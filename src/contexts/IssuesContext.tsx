@@ -57,7 +57,7 @@ export function IssuesProvider({ children }: IssuesProviderProps) {
     setIssuesSearchData(response.data.items)
     setTimeout(() => {
       setIsLoadingIssuesData(true)
-    }, 300)
+    }, 100)
   }
 
   async function fetchIssuesData(issueNumber: string | undefined) {

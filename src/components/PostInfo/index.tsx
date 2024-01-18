@@ -8,6 +8,7 @@ import * as S from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FooterContent, PostInfoContainer } from './styles'
 import { formatDistanceToNow } from 'date-fns'
+import Skeleton from 'react-loading-skeleton'
 
 export function PostInfo() {
   const { fetchIssuesData, issuesData } = useContext(IssueContext)
@@ -33,7 +34,7 @@ export function PostInfo() {
           <FontAwesomeIcon icon={S.faArrowUpRightFromSquare} />
         </div>
       </header>
-      <strong>{issuesData.title}</strong>
+      <strong>{issuesData.title || <Skeleton />}</strong>
       <FooterContent>
         <div className="userInfoFooterItem">
           <FontAwesomeIcon icon={faGithub} />

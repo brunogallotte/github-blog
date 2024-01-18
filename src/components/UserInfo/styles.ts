@@ -1,6 +1,8 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../styles/global'
 
 export const UserInfoContainer = styled.div`
+  position: relative;
   display: flex;
   width: 100%;
   background: ${(props) => props.theme.baseProfile};
@@ -15,6 +17,11 @@ export const UserInfoContainer = styled.div`
     height: 148px;
     object-fit: cover;
     border-radius: 8px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+    align-items: center;
   }
 `
 
@@ -36,6 +43,10 @@ export const UserInfoContent = styled.div`
 
   footer {
     margin-top: auto;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    align-items: center;
   }
 `
 
@@ -63,9 +74,20 @@ export const GitHubLink = styled.a`
   right: 0;
   margin-top: 40px;
   margin-right: 2rem;
+  padding-bottom: 0.25rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   color: ${(props) => props.theme.blue};
   text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom 0.2s;
+
+  &:hover {
+    border-bottom: 1px solid ${(props) => props.theme.blue};
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: none;
+  }
 `

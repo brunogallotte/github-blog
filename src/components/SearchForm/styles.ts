@@ -29,6 +29,7 @@ export const SearchFormContainer = styled.form`
     background: ${(props) => props.theme.baseInput};
     border: 1px solid ${(props) => props.theme.baseBorder};
     border-radius: 6px;
+    color: ${(props) => props.theme.baseText};
 
     &::placeholder {
       color: ${(props) => props.theme.baseLabel};

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../styles/global'
 
 export const PostInfoContainer = styled.div`
   display: flex;
@@ -11,6 +12,10 @@ export const PostInfoContainer = styled.div`
   margin-top: -6rem;
   box-shadow: 0px 2px 28px 0px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    height: auto;
+  }
 
   header {
     display: flex;
@@ -48,6 +53,10 @@ export const FooterContent = styled.footer`
   align-items: center;
   gap: 2rem;
   margin-top: auto;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    gap: 0.5rem;
+  }
 
   .userInfoFooterItem {
     display: flex;

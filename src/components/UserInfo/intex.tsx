@@ -5,14 +5,14 @@ import {
   faUserGroup,
   faArrowUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons'
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
 
 import * as S from './styles'
 
 import { api } from '../../lib/axios'
 import { useEffect, useState } from 'react'
-import { SkeletonLoading } from './components'
+import { SkeletonLoading } from './components/SkeletonLoading'
+import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton'
 
 interface User {
   login: string
@@ -20,6 +20,7 @@ interface User {
   company: string
   bio: string
   html_url: string
+  avatar_url: string
 }
 
 export function UserInfo() {
@@ -34,16 +35,20 @@ export function UserInfo() {
   useEffect(() => {
     setTimeout(() => {
       fetchUserInfo()
-    }, 1000)
+    }, 200)
   }, [])
 
   return (
     <S.UserInfoContainer className="container">
-      <img
-        src="http://www.github.com/brunogallotte.png"
-        alt="Imagem de perfil"
-        className="profileImg"
-      />
+      {userInfoData.avatar_url ? (
+        <img
+          src={userInfoData.avatar_url}
+          alt="Imagem de perfil"
+          className="profileImg"
+        />
+      ) : (
+        <Skeleton className="profileImg" />
+      )}
       <S.UserInfoContent>
         {userInfoData.login ? (
           <>
