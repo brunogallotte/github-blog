@@ -16,24 +16,25 @@ export function PostInfo() {
   const { issueNumber } = useParams()
 
   useEffect(() => {
-    setTimeout(() => fetchIssuesData(issueNumber), 1000)
+    fetchIssuesData(issueNumber)
   }, [])
 
   return (
     <PostInfoContainer className="container">
       <header>
-        <div className="wrapper">
-          <FontAwesomeIcon icon={S.faChevronLeft} />
-          <Link to="/">
+        <Link to="/">
+          <div className="wrapper">
+            <FontAwesomeIcon icon={S.faChevronLeft} />
+
             <span>voltar</span>
-          </Link>
-        </div>
-        <div className="wrapper">
-          <a href={issuesData.html_url} target="_blank" rel="noreferrer">
+          </div>
+        </Link>
+        <a href={issuesData.html_url} target="_blank" rel="noreferrer">
+          <div className="wrapper">
             <span>ver no git hub</span>
-          </a>
-          <FontAwesomeIcon icon={S.faArrowUpRightFromSquare} />
-        </div>
+            <FontAwesomeIcon icon={S.faArrowUpRightFromSquare} />
+          </div>
+        </a>
       </header>
       <strong>{issuesData.title || <Skeleton />}</strong>
       <FooterContent>

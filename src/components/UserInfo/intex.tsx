@@ -33,9 +33,7 @@ export function UserInfo() {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchUserInfo()
-    }, 200)
+    fetchUserInfo()
   }, [])
 
   return (
