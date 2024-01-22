@@ -9,13 +9,14 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { FooterContent, PostInfoContainer } from './styles'
 import { formatDistanceToNow } from 'date-fns'
 import Skeleton from 'react-loading-skeleton'
+import { ptBR } from 'date-fns/locale'
 
 export function PostInfo() {
   const { fetchIssuesData, issuesData } = useContext(IssueContext)
   const { issueNumber } = useParams()
 
   useEffect(() => {
-    fetchIssuesData(issueNumber)
+    setTimeout(() => fetchIssuesData(issueNumber), 1000)
   }, [])
 
   return (
@@ -38,23 +39,26 @@ export function PostInfo() {
       <FooterContent>
         <div className="userInfoFooterItem">
           <FontAwesomeIcon icon={faGithub} />
-          <span>{issuesData.user?.login || 'Usuário não definido'}</span>
+          <span>{issuesData.user?.login || <Skeleton />}</span>
         </div>
         <div className="userInfoFooterItem">
           <FontAwesomeIcon icon={S.faCalendarDay} />
           <time>
-            {issuesData.created_at && (
+            {issuesData.created_at ? (
               <>
                 {formatDistanceToNow(new Date(issuesData.created_at), {
                   addSuffix: true,
+                  locale: ptBR,
                 })}
               </>
+            ) : (
+              <Skeleton />
             )}
           </time>
         </div>
         <div className="userInfoFooterItem">
           <FontAwesomeIcon icon={S.faComment} />
-          <time>{issuesData.comments}</time>
+          <time>{issuesData.title ? issuesData.comments : <Skeleton />}</time>
         </div>
       </FooterContent>
     </PostInfoContainer>

@@ -45,6 +45,13 @@ export const PostInfoContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 0.25rem;
+    transition: border-bottom 0.2s;
+
+    &:hover {
+      border-bottom: 1px solid ${(props) => props.theme.blue};
+    }
   }
 `
 
@@ -72,6 +79,7 @@ export const FooterContent = styled.footer`
     span,
     time {
       color: ${(props) => props.theme.baseSpan};
+      min-width: 100px;
     }
   }
 `
