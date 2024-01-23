@@ -1,30 +1,49 @@
-# React + TypeScript + Vite
+<h1 align="center">
+    # Github Blog
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-layout">Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-licença">Licença</a>
+</p>
 
-Currently, two official plugins are available:
+<p align="center">
+ <img src="https://img.shields.io/static/v1?label=PRs&message=welcome&color=15C3D6&labelColor=000000" alt="PRs welcome!" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=15C3D6&labelColor=000000">
+</p>
 
-## Expanding the ESLint configuration
+<br>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<p align="center">
+  <img alt="Github Blog Banner" src="./src//assets//images/banner.png" width="100%">
+</p>
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 Tecnologias
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Esse projeto foi desenvolvido com as seguintes tecnologias:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- [React](https://reactjs.org)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Styled Components](https://styled-components.com/)
+
+## 💻 Projeto
+
+O projeto foi um desafio do bootcamp de especialização em React.js do Ignite, que propos a revisão e aprendizado dos seguintes temas: Fetch / Axios, Roteamento e React Router DOM, Formulários.
+
+Desenvolvido a partir do protótipo do figma, utilizando ContextAPI para gerenciar o estados globais e axios para requisições, formulário controlado com React Hook Form e validado com Zod. Todos as demandas do desafio foram cumpridas com êxito! Você pode verificar <a href="https://efficient-sloth-d85.notion.site/Desafio-03-Github-Blog-13593953670346908462ddc648d42cf1">clicando aqui </a>
+
+## 🔖 Layout
+
+Nos links abaixo você encontra o layout do projeto web. Lembrando que você precisa ter uma conta no [Figma](http://figma.com/) para acessá-lo.
+
+- [Layout Figma](https://www.figma.com/community/file/1138814951106121051)
+- [Vercel](https://github-blog-dcgnfpi34-brunogallotte.vercel.app/)
+
+## :memo: Licença
+
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
+
+---
